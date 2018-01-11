@@ -83,7 +83,8 @@ Pod::Spec.new do |s|
   #
 
   #s.source   = { :git => 'https://github.com/makleso6/SugarKit.git', :tag => s.version, :submodules => true }
-  s.source   = { :git => 'https://github.com/makleso6/SugarKit.git', :tag => s.version}
+  s.source   = { :git => 'https://github.com/makleso6/SugarKit.git', :tag => s.version, :submodules => false }
+  #s.source   = { :git => 'https://github.com/makleso6/SugarKit.git', :tag => s.version}
 
 
   # ――― Source Code ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
