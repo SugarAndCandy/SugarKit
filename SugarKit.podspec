@@ -136,4 +136,12 @@ Pod::Spec.new do |s|
   # s.xcconfig = { "HEADER_SEARCH_PATHS" => "$(SDKROOT)/usr/include/libxml2" }
   # s.dependency "JSONKit", "~> 1.4"
 
+  s.subspec 'SugarData' do |ss|
+    ss.source_files = 'SugarData/**/*.swift'
+    #ss.public_header_files = 'AFNetworking/AFURL{Request,Response}Serialization.h'
+    #ss.watchos.frameworks = 'MobileCoreServices', 'CoreGraphics'
+    #ss.ios.frameworks = 'MobileCoreServices', 'CoreGraphics'
+    #ss.osx.frameworks = 'CoreServices'
+  end
+
 end
