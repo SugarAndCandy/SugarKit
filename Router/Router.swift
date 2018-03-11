@@ -9,53 +9,53 @@
 import Foundation
 
 import UIKit
-typealias ModuleTransitionBlock = (_ sourceModuleTransitionHandler: UIViewController, _ destinationModuleTransitionHandler: UIViewController) -> Void
+public typealias ModuleTransitionBlock = (_ sourceModuleTransitionHandler: UIViewController, _ destinationModuleTransitionHandler: UIViewController) -> Void
 
-struct Moduling<Base> {
+public struct Moduling<Base> {
     public let base: Base
     public init(_ base: Base) {
         self.base = base
     }
-    func perform(moduleInput: (_ presenter: Base) -> Void) {
+    public func perform(moduleInput: (_ presenter: Base) -> Void) {
         moduleInput(self.base)
     }
 }
 
-protocol TransitionView: class {
+public protocol TransitionView: class {
     associatedtype Presenter
     var presenter: Presenter { get set }
     var asViewController: UIViewController? { get }
 }
 
-extension TransitionView {
+public extension TransitionView {
     var asViewController: UIViewController? { return nil }
 }
 
-extension TransitionView where Self: UIViewController {
+public extension TransitionView where Self: UIViewController {
     var asViewController: UIViewController? { return self  }
 }
 
-protocol FactoryProtocol {
+public protocol FactoryProtocol {
     associatedtype Transition: TransitionView
     func instantiateModuleTransitionHandler() -> Transition
     static func instantiateModuleTransitionHandler() -> Transition
     
 }
 
-extension FactoryProtocol {
+public extension FactoryProtocol {
     func instantiateModuleTransitionHandler() -> Transition {
         return type(of: self).instantiateModuleTransitionHandler()
     }
 }
 
-enum TransitionError: Error {
+public enum TransitionError: Error {
     case castError
 }
 
-struct Transition<T: TransitionView> {
-    weak var source: T?
+public struct Transition<T: TransitionView> {
+    public weak var source: T?
     
-    @discardableResult func openModule<Factory, Presenter>(using factory: Factory, with transitionBlock: ModuleTransitionBlock) throws -> Moduling<Presenter>
+    @discardableResult public func openModule<Factory, Presenter>(using factory: Factory, with transitionBlock: ModuleTransitionBlock) throws -> Moduling<Presenter>
         where Factory: FactoryProtocol, Presenter == Factory.Transition.Presenter {
             let destanation = factory.instantiateModuleTransitionHandler()
             let presenter = destanation.presenter
@@ -67,6 +67,4 @@ struct Transition<T: TransitionView> {
     }
 }
 
-extension Transition where T: UIViewController {
-    
-}
+

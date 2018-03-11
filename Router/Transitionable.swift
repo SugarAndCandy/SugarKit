@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol Transitionable {
+public protocol Transitionable {
     associatedtype View: TransitionView
     var view: View? { get set }
     
@@ -17,7 +17,6 @@ protocol Transitionable {
     
     func present(transiton source: UIViewController, destanation: UIViewController)
     func present(transiton handler: UIViewController)
-    
     func presentUsingNavigationController(transiton source: UIViewController, destanation: UIViewController)
     func presentUsingNavigationController(transiton destanation: UIViewController)
     
@@ -27,7 +26,7 @@ protocol Transitionable {
     var presentUsingNavigationController: ModuleTransitionBlock { get }
 }
 
-extension Transitionable {
+public extension Transitionable {
     var presentTansitionBlock: ModuleTransitionBlock {
         return { source, destanation  in
             self.present(transiton: source, destanation: destanation)
