@@ -4,7 +4,7 @@ Pod::Spec.new do |s|
 
 
   s.name         = "SugarKit"
-  s.version      = "0.0.1"
+  s.version      = "0.0.2"
   s.summary  = 'Framework which hepls You develop your app faster'
 
 
@@ -14,7 +14,7 @@ Pod::Spec.new do |s|
                    native swift POP
                    DESC
 
-  s.homepage = 'https://github.com/makleso6/SugarKit.git'
+  s.homepage = 'https://github.com/SugarAndCandy/SugarKit.git'
  
   s.license      = "MIT"
  
@@ -22,16 +22,12 @@ Pod::Spec.new do |s|
   
   s.ios.deployment_target = "9.0"
  
-  s.source   = { :git => 'https://github.com/makleso6/SugarKit.git', :tag => s.version, :submodules => false }
+  s.source   = { :git => 'https://github.com/SugarAndCandy/SugarKit.git', :tag => s.version, :submodules => false }
   
   s.source_files = 'SugarKit/**/*.swift'
 
   s.subspec 'Router' do |ss|
     ss.source_files = 'Router/**/*.swift'
-    #ss.public_header_files = 'AFNetworking/AFURL{Request,Response}Serialization.h'
-    #ss.watchos.frameworks = 'MobileCoreServices', 'CoreGraphics'
-    #ss.ios.frameworks = 'MobileCoreServices', 'CoreGraphics'
-    #ss.osx.frameworks = 'CoreServices'
   end
 
 end
