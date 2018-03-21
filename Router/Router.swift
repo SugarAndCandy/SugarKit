@@ -36,14 +36,14 @@ public extension TransitionView where Self: UIViewController {
 }
 
 public protocol FactoryProtocol {
-    associatedtype Transition: TransitionView
-    func instantiateModuleTransitionHandler() -> Transition
-    static func instantiateModuleTransitionHandler() -> Transition
+    associatedtype TransitionHandler: TransitionView
+    func instantiateModuleTransitionHandler() -> TransitionHandler
+    static func instantiateModuleTransitionHandler() -> TransitionHandler
     
 }
 
 public extension FactoryProtocol {
-    func instantiateModuleTransitionHandler() -> Transition {
+    func instantiateModuleTransitionHandler() -> TransitionHandler {
         return type(of: self).instantiateModuleTransitionHandler()
     }
 }
@@ -54,9 +54,11 @@ public enum TransitionError: Error {
 
 public struct Transition<T: TransitionView> {
     public weak var source: T?
-    
+    public init(source aSource: T) {
+        source = aSource
+    }
     @discardableResult public func openModule<Factory, Presenter>(using factory: Factory, with transitionBlock: ModuleTransitionBlock) throws -> Moduling<Presenter>
-        where Factory: FactoryProtocol, Presenter == Factory.Transition.Presenter {
+        where Factory: FactoryProtocol, Presenter == Factory.TransitionHandler.Presenter {
             let destanation = factory.instantiateModuleTransitionHandler()
             let presenter = destanation.presenter
             let module = Moduling(presenter)
@@ -66,5 +68,4 @@ public struct Transition<T: TransitionView> {
             return module
     }
 }
-
 
