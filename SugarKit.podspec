@@ -4,7 +4,7 @@ Pod::Spec.new do |s|
 
 
   s.name         = "SugarKit"
-  s.version      = "0.0.2"
+  s.version      = "0.0.3"
   s.summary  = 'Framework which hepls You develop your app faster'
 
 
@@ -31,15 +31,6 @@ Pod::Spec.new do |s|
   end
 
   s.subspec 'Analytics' do |ss|
-    ss.source_files = 'Analytics/Analytics/**/*.swift'
+    ss.source_files = 'Analytics/Analytics/Analytics/**/*.swift'
   end
-
-  s.subspec 'CrashlyticsAnalytics' do |ss|
-    ss.source_files = 'Analytics/CrashlyticsAnalytics/**/*.swift'
-  end
-
-  s.subspec 'FacebookAnalytics' do |ss|
-    ss.source_files = 'Analytics/FacebookAnalytics/**/*.swift'
-  end
-
 end
