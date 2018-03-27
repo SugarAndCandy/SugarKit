@@ -26,11 +26,18 @@ Pod::Spec.new do |s|
   
   s.source_files = 'SugarKit/**/*.swift'
 
+  s.swift_version = '4'
+
   s.subspec 'Router' do |ss|
     ss.source_files = 'Router/**/*.swift'
   end
 
   s.subspec 'Analytics' do |ss|
     ss.source_files = 'Analytics/Analytics/Analytics/**/*.swift'
+  end
+  s.subspec 'FacebookAnalytics' do |ss|
+    ss.source_files = 'Analytics/FacebookAnalytics/**/*.swift'
+    ss.dependency 'FBSDKCoreKit'
+    ss.dependency 'SugarKit/Analytics'
   end
 end
