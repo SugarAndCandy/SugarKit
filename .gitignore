@@ -1,0 +1,13 @@
+syntax: glob
+xcuserdata
+local.properties
+*.orig
+*/Pods/*
+**/Pods/*
+Pods/*
+build/*
+*/build/*
+*.generated.swift
+*.xcworkspace
+*Podfile.lock
+

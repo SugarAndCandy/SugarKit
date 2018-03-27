@@ -30,4 +30,16 @@ Pod::Spec.new do |s|
     ss.source_files = 'Router/**/*.swift'
   end
 
+  s.subspec 'Analytics' do |ss|
+    ss.source_files = 'Analytics/Analytics/**/*.swift'
+  end
+
+  s.subspec 'CrashlyticsAnalytics' do |ss|
+    ss.source_files = 'Analytics/CrashlyticsAnalytics/**/*.swift'
+  end
+
+  s.subspec 'FacebookAnalytics' do |ss|
+    ss.source_files = 'Analytics/FacebookAnalytics/**/*.swift'
+  end
+
 end
