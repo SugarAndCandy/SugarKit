@@ -9,7 +9,7 @@
 import Foundation
 import FBSDKCoreKit
 
-public class FacebookAnalyticsAdapter: AnalyticsProtocol, AnalyticsEndpointProtocol {
+public final class FacebookAnalyticsAdapter: AnalyticsProtocol, AnalyticsEndpointProtocol {
         
     public private(set) var event: Event
     public private(set) var parameters: [Event.Name: Any]?
@@ -32,10 +32,12 @@ public class FacebookAnalyticsAdapter: AnalyticsProtocol, AnalyticsEndpointProto
     public func execute() {
         let _event = self.event
         let _parameters = self.parameters
-        let oper = AnalyticsOperation(block: {
+        let operation = AnalyticsOperation(block: {
             FacebookAnalyticsAdapter.log(_event, parameters: _parameters)
         })
-        operationQueue.addOperation(oper)
+        operation.queuePriority = .low
+        operation.qualityOfService = .utility
+        operationQueue.addOperation(operation)
     }
     
     public func cancel() {
