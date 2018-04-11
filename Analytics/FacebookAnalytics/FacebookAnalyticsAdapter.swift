@@ -13,10 +13,6 @@ public class FacebookAnalyticsAdapter: AnalyticsProtocol, AnalyticsEndpointProto
         
     public private(set) var event: Event
     public private(set) var parameters: [Event.Name: Any]?
-    public private(set) var trakingTimeInterval: TimeInterval = 0
-    
-    public private(set) var startTimeInterval: TimeInterval = Date().timeIntervalSince1970
-    
     
     public init(event aEvent: Event, parameters aParameters: [Event.Name: Any]?) {
         event = aEvent
@@ -33,30 +29,29 @@ public class FacebookAnalyticsAdapter: AnalyticsProtocol, AnalyticsEndpointProto
         return facebookAnalytics
     }
     
-    public func startTracking() {
-        startTimeInterval = Date().timeIntervalSince1970
-    }
-    
-    public func finishTracking() {
-        let currentTimeInterval = Date().timeIntervalSince1970
-        trakingTimeInterval = currentTimeInterval - startTimeInterval
-    }
-    
     public func execute() {
-        
-        log(event, parameters: parameters)
+        let _event = self.event
+        let _parameters = self.parameters
+        let oper = AnalyticsOperation(block: {
+            FacebookAnalyticsAdapter.log(_event, parameters: _parameters)
+        })
+        operationQueue.addOperation(oper)
     }
     
     public func cancel() {
         operationQueue.cancelAllOperations()
     }
     
-    public func log(_ event: Event, parameters: [Event.Name: Any]?) {
+    static func log(_ event: Event, parameters: [Event.Name: Any]?) {
         if let wrappedParameters = parameters?.map(transform: { ($0.rawValue, $1)}) {
             FBSDKAppEvents.logEvent(event.rawValue, parameters: wrappedParameters)
         } else {
             FBSDKAppEvents.logEvent(event.rawValue)
         }
+    }
+    
+    public func log(_ event: Event, parameters: [Event.Name: Any]?) {
+        FacebookAnalyticsAdapter.log(event, parameters: parameters)
     }
 }
 
