@@ -8,20 +8,20 @@
 
 import Foundation
 
-struct Log {
-    static func warning(_ string: String) {
+public struct Log {
+    public static func warning(_ string: String) {
         print("⚠️", string)
     }
     
-    static func error(_ string: String) {
+    public static func error(_ string: String) {
         print("🛑", string)
     }
 
-    static func success(_ string: String) {
+    public static func success(_ string: String) {
         print("✅", string)
     }
     
-    static func `default`(_ string: String) {
+    public static func `default`(_ string: String) {
         print(string)
     }
 
