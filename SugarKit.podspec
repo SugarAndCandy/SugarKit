@@ -44,4 +44,8 @@ Pod::Spec.new do |s|
   s.subspec 'Log' do |ss|
     ss.source_files = 'Log/**/*.swift'
   end
+  s.subspec 'KeychainStore' do |ss|
+    ss.source_files = 'Log/**/*.swift'
+    ss.dependency 'SugarKit/Log'
+  end
 end
