@@ -1,15 +1,20 @@
 //
-//  KeyChainWrapper.swift
-//  Sugar
+//  KeychainStore.swift
+//  SugarKit
 //
 //  Created by Maksim Kolesnik on 19.04.2018.
-//  Copyright © 2018 Maksim Kolesnik. All rights reserved.
+//  Copyright © 2018 Sugar and Candy. All rights reserved.
 //
 
 import Foundation
 import UIKit
 
-public class KeychainStore {
+public protocol KeychainRepresentable {
+    @discardableResult func set(_ data: Data?, forKey key: String) -> Bool
+    func data(forKey key: String) -> Data?
+}
+
+public class KeychainStore: KeychainRepresentable {
     
     public struct KeychainStoreConstants {
         public static var accessGroup: String { return toString(kSecAttrAccessGroup) }
@@ -30,7 +35,7 @@ public class KeychainStore {
         service = aService
     }
 
-    public func set(_ data: Data?, forKey key: String) -> Bool {
+    @discardableResult public func set(_ data: Data?, forKey key: String) -> Bool {
         var status: OSStatus = OSStatus(0)
         var dict = query(forKey: key)
         if let aData = data {
