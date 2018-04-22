@@ -16,6 +16,11 @@
 		8C373AC9208A01E4002D47FB /* RecordError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C373AC8208A01E4002D47FB /* RecordError.swift */; };
 		8C373ACC208A049C002D47FB /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C373ACB208A049C002D47FB /* Coordinator.swift */; };
 		8C373AD0208A04DD002D47FB /* Log+Record.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C373ACF208A04DD002D47FB /* Log+Record.swift */; };
+		943B755C208CD16100F8F652 /* EntityNaming.swift in Sources */ = {isa = PBXBuildFile; fileRef = 943B755A208CD16100F8F652 /* EntityNaming.swift */; };
+		943B755D208CD16100F8F652 /* AnyEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 943B755B208CD16100F8F652 /* AnyEntity.swift */; };
+		943B7561208CD17D00F8F652 /* Entity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 943B755E208CD17D00F8F652 /* Entity.swift */; };
+		943B7562208CD17D00F8F652 /* Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = 943B755F208CD17D00F8F652 /* Request.swift */; };
+		943B7563208CD17D00F8F652 /* FetchRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 943B7560208CD17D00F8F652 /* FetchRequest.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -41,6 +46,11 @@
 		8C373AC8208A01E4002D47FB /* RecordError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordError.swift; sourceTree = "<group>"; };
 		8C373ACB208A049C002D47FB /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		8C373ACF208A04DD002D47FB /* Log+Record.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Log+Record.swift"; sourceTree = "<group>"; };
+		943B755A208CD16100F8F652 /* EntityNaming.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EntityNaming.swift; sourceTree = "<group>"; };
+		943B755B208CD16100F8F652 /* AnyEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnyEntity.swift; sourceTree = "<group>"; };
+		943B755E208CD17D00F8F652 /* Entity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Entity.swift; sourceTree = "<group>"; };
+		943B755F208CD17D00F8F652 /* Request.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Request.swift; sourceTree = "<group>"; };
+		943B7560208CD17D00F8F652 /* FetchRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FetchRequest.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -84,6 +94,11 @@
 			isa = PBXGroup;
 			children = (
 				8C373AAB208A0081002D47FB /* Record.h */,
+				943B755E208CD17D00F8F652 /* Entity.swift */,
+				943B7560208CD17D00F8F652 /* FetchRequest.swift */,
+				943B755F208CD17D00F8F652 /* Request.swift */,
+				943B755B208CD16100F8F652 /* AnyEntity.swift */,
+				943B755A208CD16100F8F652 /* EntityNaming.swift */,
 				8C373ACF208A04DD002D47FB /* Log+Record.swift */,
 				8C373AC2208A00A9002D47FB /* Stack.swift */,
 				8C373AC8208A01E4002D47FB /* RecordError.swift */,
@@ -213,12 +228,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				943B7563208CD17D00F8F652 /* FetchRequest.swift in Sources */,
 				8C373AC7208A01BD002D47FB /* Store.swift in Sources */,
 				8C373AC9208A01E4002D47FB /* RecordError.swift in Sources */,
 				8C373ACC208A049C002D47FB /* Coordinator.swift in Sources */,
 				8C373AD0208A04DD002D47FB /* Log+Record.swift in Sources */,
 				8C373AC3208A00A9002D47FB /* Stack.swift in Sources */,
+				943B7561208CD17D00F8F652 /* Entity.swift in Sources */,
 				8C373AC5208A0165002D47FB /* Context.swift in Sources */,
+				943B7562208CD17D00F8F652 /* Request.swift in Sources */,
+				943B755C208CD16100F8F652 /* EntityNaming.swift in Sources */,
+				943B755D208CD16100F8F652 /* AnyEntity.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

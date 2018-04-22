@@ -9,16 +9,16 @@
 import Foundation
 import CoreData
 
-class Stack {
+public class Stack {
     
-    static var main: Stack {
+    public static var main: Stack {
         assert(initialized == nil, "Stack  is not setup. Run `Stack.setup(stack:autoMigration:)`")
         return initialized!
     }
     
-    let store: Store
-    let coordinator: Coordinator
-    let context: Context
+    public let store: Store
+    public let coordinator: Coordinator
+    public let context: Context
 
     private init(store: Store, coordinator: Coordinator, context: Context) {
         self.store = store
@@ -38,7 +38,7 @@ class Stack {
         return [NSSQLitePragmasOption: ["journal_mode": "WAL"]]
     }
     
-    static func setup(stack modelName: String, autoMigration: Bool = false) throws -> Stack {
+    @discardableResult public static func setup(stack modelName: String, autoMigration: Bool = false) throws -> Stack {
         
         guard let urlForModel = Bundle.main.url(forResource: modelName, withExtension: "momd") else {
             throw RecordError(file: #file, function: #function, message: "Not found url to model '\(modelName)' in main bundle")
@@ -85,7 +85,7 @@ class Stack {
             savingContext.persistentStoreCoordinator = persistentStoreCoordinator
         }
 
-        let context = Context(main: mainContext, saving: savingContext)
+        let context = setupContext(root: mainContext, saving: savingContext)
         let store = Store()
         let coordinator = Coordinator()
         let stack =  Stack(store: store, coordinator: coordinator, context: context)
@@ -93,8 +93,8 @@ class Stack {
         return stack
     }
     
-    func setupContext(main: NSManagedObjectContext, saving: NSManagedObjectContext) -> Context {
-        let context = Context(main: main, saving: saving)
+    static func setupContext(root: NSManagedObjectContext, saving: NSManagedObjectContext) -> Context {
+        let context = Context(root: root, saving: saving)
         Context.initialized = context
         
         return context

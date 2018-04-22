@@ -8,6 +8,6 @@
 
 import Foundation
 
-struct Coordinator {
+public struct Coordinator {
     
 }

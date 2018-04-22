@@ -8,6 +8,6 @@
 
 import Foundation
 
-struct Store {
+public struct Store {
     
 }

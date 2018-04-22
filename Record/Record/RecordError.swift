@@ -9,7 +9,7 @@
 import Foundation
 
 public struct RecordError: Error {
-    let file: String
-    let function: String
-    let message: String
+    public let file: String
+    public let function: String
+    public let message: String
 }
