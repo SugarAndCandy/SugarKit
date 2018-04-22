@@ -35,6 +35,7 @@ Pod::Spec.new do |s|
   s.subspec 'Analytics' do |ss|
     ss.source_files = 'Analytics/Analytics/Analytics/**/*.swift'
   end
+
   s.subspec 'FacebookAnalytics' do |ss|
     ss.source_files = 'Analytics/FacebookAnalytics/**/*.swift'
     ss.dependency 'FBSDKCoreKit'
@@ -44,8 +45,15 @@ Pod::Spec.new do |s|
   s.subspec 'Log' do |ss|
     ss.source_files = 'Log/**/*.swift'
   end
+
   s.subspec 'KeychainStore' do |ss|
     ss.source_files = 'KeychainStore/**/*.swift'
     ss.dependency 'SugarKit/Log'
   end
+
+  s.subspec 'Record' do |ss|
+    ss.source_files = 'Record/Record/**/*.swift'
+    ss.dependency 'SugarKit/Log'
+  end
+
 end
