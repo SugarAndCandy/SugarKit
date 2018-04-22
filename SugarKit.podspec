@@ -40,4 +40,12 @@ Pod::Spec.new do |s|
     ss.dependency 'FBSDKCoreKit'
     ss.dependency 'SugarKit/Analytics'
   end
+
+  s.subspec 'Log' do |ss|
+    ss.source_files = 'Log/**/*.swift'
+  end
+  s.subspec 'KeychainStore' do |ss|
+    ss.source_files = 'KeychainStore/**/*.swift'
+    ss.dependency 'SugarKit/Log'
+  end
 end
