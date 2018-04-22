@@ -9,7 +9,7 @@
 import Foundation
 import CoreData
 
-class Request<Entity: NSManagedObject> {
+public class Request<Entity: NSManagedObject> {
     
 }
 
