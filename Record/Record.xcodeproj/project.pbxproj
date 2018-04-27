@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8C3295BD2093562000616ED6 /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C3295BC2093562000616ED6 /* Log.swift */; };
+		8C3295BF209356C200616ED6 /* AnyEntityDescription.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C3295BE209356C100616ED6 /* AnyEntityDescription.swift */; };
+		8C3295C1209356FC00616ED6 /* EntityDescriber.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C3295C0209356FC00616ED6 /* EntityDescriber.swift */; };
 		8C373AB2208A0082002D47FB /* Record.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C373AA8208A0081002D47FB /* Record.framework */; };
 		8C373AB7208A0082002D47FB /* RecordTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C373AB6208A0082002D47FB /* RecordTests.swift */; };
 		8C373AB9208A0082002D47FB /* Record.h in Headers */ = {isa = PBXBuildFile; fileRef = 8C373AAB208A0081002D47FB /* Record.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -17,7 +20,7 @@
 		8C373ACC208A049C002D47FB /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C373ACB208A049C002D47FB /* Coordinator.swift */; };
 		8C373AD0208A04DD002D47FB /* Log+Record.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C373ACF208A04DD002D47FB /* Log+Record.swift */; };
 		943B755C208CD16100F8F652 /* EntityNaming.swift in Sources */ = {isa = PBXBuildFile; fileRef = 943B755A208CD16100F8F652 /* EntityNaming.swift */; };
-		943B755D208CD16100F8F652 /* AnyEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 943B755B208CD16100F8F652 /* AnyEntity.swift */; };
+		943B755D208CD16100F8F652 /* AnyEntityNaming.swift in Sources */ = {isa = PBXBuildFile; fileRef = 943B755B208CD16100F8F652 /* AnyEntityNaming.swift */; };
 		943B7561208CD17D00F8F652 /* Entity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 943B755E208CD17D00F8F652 /* Entity.swift */; };
 		943B7562208CD17D00F8F652 /* Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = 943B755F208CD17D00F8F652 /* Request.swift */; };
 		943B7563208CD17D00F8F652 /* FetchRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 943B7560208CD17D00F8F652 /* FetchRequest.swift */; };
@@ -34,6 +37,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		8C3295B72093554300616ED6 /* Log.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Log.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		8C3295BC2093562000616ED6 /* Log.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Log.swift; path = ../../../Log/Log.swift; sourceTree = "<group>"; };
+		8C3295BE209356C100616ED6 /* AnyEntityDescription.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnyEntityDescription.swift; sourceTree = "<group>"; };
+		8C3295C0209356FC00616ED6 /* EntityDescriber.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntityDescriber.swift; sourceTree = "<group>"; };
 		8C373AA8208A0081002D47FB /* Record.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Record.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8C373AAB208A0081002D47FB /* Record.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Record.h; sourceTree = "<group>"; };
 		8C373AAC208A0081002D47FB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -47,7 +54,7 @@
 		8C373ACB208A049C002D47FB /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		8C373ACF208A04DD002D47FB /* Log+Record.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Log+Record.swift"; sourceTree = "<group>"; };
 		943B755A208CD16100F8F652 /* EntityNaming.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EntityNaming.swift; sourceTree = "<group>"; };
-		943B755B208CD16100F8F652 /* AnyEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnyEntity.swift; sourceTree = "<group>"; };
+		943B755B208CD16100F8F652 /* AnyEntityNaming.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnyEntityNaming.swift; sourceTree = "<group>"; };
 		943B755E208CD17D00F8F652 /* Entity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Entity.swift; sourceTree = "<group>"; };
 		943B755F208CD17D00F8F652 /* Request.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Request.swift; sourceTree = "<group>"; };
 		943B7560208CD17D00F8F652 /* FetchRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FetchRequest.swift; sourceTree = "<group>"; };
@@ -72,12 +79,29 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		8C3295B62093554300616ED6 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				8C3295B72093554300616ED6 /* Log.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		8C3295BB209355F000616ED6 /* Support */ = {
+			isa = PBXGroup;
+			children = (
+				8C3295BC2093562000616ED6 /* Log.swift */,
+			);
+			path = Support;
+			sourceTree = "<group>";
+		};
 		8C373A9E208A0081002D47FB = {
 			isa = PBXGroup;
 			children = (
 				8C373AAA208A0081002D47FB /* Record */,
 				8C373AB5208A0082002D47FB /* RecordTests */,
 				8C373AA9208A0081002D47FB /* Products */,
+				8C3295B62093554300616ED6 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -94,10 +118,11 @@
 			isa = PBXGroup;
 			children = (
 				8C373AAB208A0081002D47FB /* Record.h */,
+				8C3295BB209355F000616ED6 /* Support */,
 				943B755E208CD17D00F8F652 /* Entity.swift */,
 				943B7560208CD17D00F8F652 /* FetchRequest.swift */,
+				943B755B208CD16100F8F652 /* AnyEntityNaming.swift */,
 				943B755F208CD17D00F8F652 /* Request.swift */,
-				943B755B208CD16100F8F652 /* AnyEntity.swift */,
 				943B755A208CD16100F8F652 /* EntityNaming.swift */,
 				8C373ACF208A04DD002D47FB /* Log+Record.swift */,
 				8C373AC2208A00A9002D47FB /* Stack.swift */,
@@ -105,6 +130,8 @@
 				8C373AC4208A0165002D47FB /* Context.swift */,
 				8C373AC6208A01BD002D47FB /* Store.swift */,
 				8C373ACB208A049C002D47FB /* Coordinator.swift */,
+				8C3295BE209356C100616ED6 /* AnyEntityDescription.swift */,
+				8C3295C0209356FC00616ED6 /* EntityDescriber.swift */,
 				8C373AAC208A0081002D47FB /* Info.plist */,
 			);
 			path = Record;
@@ -228,17 +255,20 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8C3295C1209356FC00616ED6 /* EntityDescriber.swift in Sources */,
 				943B7563208CD17D00F8F652 /* FetchRequest.swift in Sources */,
 				8C373AC7208A01BD002D47FB /* Store.swift in Sources */,
+				8C3295BD2093562000616ED6 /* Log.swift in Sources */,
 				8C373AC9208A01E4002D47FB /* RecordError.swift in Sources */,
 				8C373ACC208A049C002D47FB /* Coordinator.swift in Sources */,
 				8C373AD0208A04DD002D47FB /* Log+Record.swift in Sources */,
 				8C373AC3208A00A9002D47FB /* Stack.swift in Sources */,
+				8C3295BF209356C200616ED6 /* AnyEntityDescription.swift in Sources */,
 				943B7561208CD17D00F8F652 /* Entity.swift in Sources */,
 				8C373AC5208A0165002D47FB /* Context.swift in Sources */,
 				943B7562208CD17D00F8F652 /* Request.swift in Sources */,
 				943B755C208CD16100F8F652 /* EntityNaming.swift in Sources */,
-				943B755D208CD16100F8F652 /* AnyEntity.swift in Sources */,
+				943B755D208CD16100F8F652 /* AnyEntityNaming.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -17,7 +17,7 @@ public protocol EntityDescriptionsCreatable: class {
 public class EntityDescription<Entity: NSManagedObject>: EntityDescriptionsCreatable {
     
     public static func entityDescription(in context: NSManagedObjectContext) -> NSEntityDescription? {
-        let forEntityName = AnyEntityNaming.init(objectType: Entity.self).entityName
+        let forEntityName = AnyEntityNaming(Entity.self).entityName
         let entityDescription = NSEntityDescription.entity(forEntityName: forEntityName, in: context)
         return entityDescription
     }
@@ -30,6 +30,9 @@ public struct Entity<T: NSManagedObject> {
         self.entity = entity
     }
     
+}
+extension Entity {
+
     public func `in`(_ context: NSManagedObjectContext = Context.main.root) -> T? {
         if entity.objectID.isTemporaryID {
             do { try entity.managedObjectContext?.obtainPermanentIDs(for: [entity]) }
@@ -45,8 +48,34 @@ public struct Entity<T: NSManagedObject> {
         }
     }
     
+    
+}
+
+
+extension Entity {
+    
     public static func create(in context: NSManagedObjectContext = Context.main.saving) -> T? {
         guard let entityDescription = EntityDescription<T>.entityDescription(in: context) else { return nil }
         return NSManagedObject(entity: entityDescription, insertInto: context) as? T
+    }
+    
+    public static func create(from object: [AnyHashable: Any], in context: NSManagedObjectContext) -> T? {
+        var managedObject: NSManagedObject?
+        context.performAndWait {
+            if let primaryKeyAttribute = AnyEntityDescription<T>.primaryKey {//entityDescription(in: context)?.primaryKey {
+            
+                if let primaryKey = object[AttributeDescription(primaryKeyAttribute).mappedKey] {//object[primaryKeyAttribute.mappedKey] {
+                    let predicate = NSPredicate(format: "%K == %@", argumentArray: [primaryKeyAttribute.name, primaryKey])
+//                    let filter = Filter<Self>(nsPredicate: predicate)
+                    managedObject = Request<T>.first(with: predicate, in: context)//first(when: filter, in: context)
+                }
+            }
+            if managedObject == nil {
+                managedObject = create(in: context)
+            }
+//            managedObject?.importValues(from: object, in: context)
+        }
+        return nil
+//        return managedObject as? Self
     }
 }

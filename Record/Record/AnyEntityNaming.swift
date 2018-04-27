@@ -15,11 +15,11 @@ public struct AnyEntityNaming: EntityNaming {
     }
     
     public let objectType: NSObject.Type
-    public init(object: NSObject) {
+    public init(_ object: NSObject) {
         self.objectType = type(of: object)
     }
     
-    public init(objectType: NSObject.Type) {
+    public init(_ objectType: NSObject.Type) {
         self.objectType = objectType
     }
 }

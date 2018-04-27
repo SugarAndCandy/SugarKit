@@ -8,7 +8,6 @@
 
 import Foundation
 
-
 extension Log.Prefix {
     public static var record: Log.Prefix {
         return Log.Prefix(rawValue: "SugarKit/Record")
