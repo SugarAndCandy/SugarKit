@@ -30,8 +30,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             return ["id" : $0, "name" : "user_name", "shops":
                 [["id" : $0, "name" : "shop_name", "address": ["id" : $0, "name" : "address_name"]]]]
         })
-    
-
         
         Saver<User>.saveEntities(onSerialQueue: userInfo, deleteUnmatched: false, completionOnMainThread: { (users) in
             print(users)
