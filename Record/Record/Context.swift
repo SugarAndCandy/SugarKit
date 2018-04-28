@@ -6,7 +6,6 @@
 //  Copyright © 2018 Sugar and Candy. All rights reserved.
 //
 
-import Foundation
 import CoreData
 
 
@@ -14,6 +13,8 @@ public typealias SaveCompletionHandler = (Bool, Error?) -> ()
 
 public class Context {
     
+    internal static var initialized: Context?
+
     public static var main: Context {
         assert(initialized != nil, "Context is not setup")
         return initialized!
@@ -45,17 +46,44 @@ extension Context {
 
     }
     
-    public static func save(changes: @escaping (NSManagedObjectContext) -> Void, completion: SaveCompletionHandler?) {
+    public static func save(with block: @escaping (NSManagedObjectContext) -> Void, completion: SaveCompletionHandler?) {
     let savingContext = Context.main.saving
     let local = context(with: savingContext)
         local.perform {
-            changes(local)
+            block(local)
             saveToPersistentStore(local, completion: completion)
         }
     }
+}
+
+extension Context {
+    public static func save(in queue: DispatchQueue,
+                            savingBlock block: @escaping (_ localContext: NSManagedObjectContext) -> Void,
+                            completionOnMainThread completion: @escaping () -> Void )  {
+        queue.async {
+            let localContext = self.privateQueuContext
+            block(localContext)
+            do {
+                try saveToPersistentStore(localContext)
+            } catch  {
+                print(error)
+            }
+            DispatchQueue.main.async {
+                completion()
+            }
+        }
+    }
+        
+}
+
+public extension Context {
+    static var privateQueuContext: NSManagedObjectContext {
+        return context(with: Context.main.saving)
+    }
     
 }
-extension Context {
+
+public extension Context {
 
     public static func newPrivateQueuContext() -> NSManagedObjectContext {
         let context = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
@@ -74,6 +102,10 @@ extension Context {
         NotificationCenter.default.addObserver(Context.main, selector: #selector(contextWillSave(_:)), name: Notification.Name.NSManagedObjectContextWillSave, object: context)
     }
     
+}
+
+internal extension Context {
+
     @objc func contextWillSave(_ motification: Notification) {
         guard let context = motification.object as? NSManagedObjectContext else { return }
         let insertedObjects = context.insertedObjects
@@ -83,7 +115,6 @@ extension Context {
         }
     }
     
-    internal static var initialized: Context?
 }
 
 extension Context {
@@ -95,9 +126,9 @@ extension Context {
             self.rawValue = rawValue
         }
         
-        static let onlySelf = SavingOptions(rawValue: 1 << 1)
-        static let withParent = SavingOptions(rawValue: 1 << 2)
-        static let synchronously = SavingOptions(rawValue: 1 << 3)
+        public static let onlySelf = SavingOptions(rawValue: 1 << 1)
+        public static let withParent = SavingOptions(rawValue: 1 << 2)
+        public static let synchronously = SavingOptions(rawValue: 1 << 3)
     }
 }
 

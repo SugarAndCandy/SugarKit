@@ -6,7 +6,6 @@
 //  Copyright © 2018 Maksim Kolesnik. All rights reserved.
 //
 
-import Foundation
 import CoreData
 
 public struct FetchRequest<Entity: NSManagedObject> {

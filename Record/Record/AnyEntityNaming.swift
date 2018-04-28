@@ -5,7 +5,6 @@
 //  Created by Maksim Kolesnik on 20.04.2018.
 //
 
-import Foundation
 import CoreData
 
 public struct AnyEntityNaming: EntityNaming {

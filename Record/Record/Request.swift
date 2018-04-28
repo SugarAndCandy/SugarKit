@@ -6,7 +6,6 @@
 //  Copyright © 2018 Maksim Kolesnik. All rights reserved.
 //
 
-import Foundation
 import CoreData
 
 public class Request<Entity: NSManagedObject> {
@@ -35,7 +34,6 @@ extension Request {
     }
     
 }
-
 
 
 extension Request {

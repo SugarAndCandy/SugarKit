@@ -6,7 +6,6 @@
 //  Copyright © 2018 Sugar and Candy. All rights reserved.
 //
 
-import Foundation
 import CoreData
 
 public class Stack {
