@@ -23,12 +23,7 @@ public class Context {
     public var root: NSManagedObjectContext
     public var saving: NSManagedObjectContext
     
-//    @available(iOS 10.0, *)
-//    internal var container: NSPersistentContainer? {
-//        return Stack.main.persistentContainer
-//    }
-    
-   internal static var isPersistentContainerAvailable: Bool {
+    internal static var isPersistentContainerAvailable: Bool {
         var available = false
         if #available(iOS 10.0, *), Stack.main.persistentContainer != nil {
             available = true
@@ -55,8 +50,7 @@ public class Context {
 }
 extension Context {
     public static func save(with block: @escaping (NSManagedObjectContext) -> Void) throws {
-        let savingContext = Context.main.saving
-        let local = context(with: savingContext)
+        let local = Context.privateQueuContext
         var returnedError: Error?
         local.performAndWait {
             block(local)
@@ -80,12 +74,12 @@ extension Context {
 extension Context {
     public static func save(in queue: DispatchQueue,
                             savingBlock block: @escaping (_ localContext: NSManagedObjectContext) -> Void,
-                            completionOnMainThread completion: @escaping () -> Void )  {
+                            completionOnMainThread completion: @escaping () -> Void)  {
         queue.async {
-            let localContext = self.privateQueuContext
-            block(localContext)
             do {
-                try saveToPersistentStore(localContext)
+                try Context.save(with: { (localContext) in
+                    block(localContext)
+                })
             } catch  {
                 print(error)
             }

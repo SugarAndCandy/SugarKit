@@ -21,7 +21,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         do {
-            try Stack.setupUsingPersistentContainer(stack: "RecordCase")//.setup(stack: "RecordCase", autoMigration: true)
+            try Stack.setup(stack: "RecordCase", autoMigration: true)
         } catch {
             print(error)
         }
@@ -33,41 +33,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
 
         
-//        Saver<User>.saveEntities(onSerialQueue: userInfo, deleteUnmatched: false, completionOnMainThread: { (users) in
-//            print(users)
-//
-//        })
-//
-//        let shopInfo = (1000..<2000).map({
-//            return ["id" : $0, "name" : "shop_name", "address": ["id" : $0, "name" : "address_name"]]
-//        })
-//
-//        Saver<Shop>.saveEntities(onSerialQueue: shopInfo, deleteUnmatched: false, completionOnMainThread: { (shops) in
-//            print(shops)
-//        })
-//
-//        let addressInfo = (500..<1000).map({
-//            return["id" : $0, "name" : "address_name"]
-//
-//        })
-//
-//        Saver<Address>.saveEntities(onSerialQueue: addressInfo, deleteUnmatched: false, completionOnMainThread: { (address) in
-//            print(address)
-//        })
-//
-//        print(Request<User>.all(in: Context.privateQueuContext).count)
-//        print(Request<User>.all(in: Context.main.root).count)
+        Saver<User>.saveEntities(onSerialQueue: userInfo, deleteUnmatched: false, completionOnMainThread: { (users) in
+            print(users)
 
-        print(Request<User>.all.count)
-//        Stack.main.persistentContainer?.performBackgroundTask({ (context) in
-//            let user = Entity<User>.create(in: context)
-//            user?.name = "performBackgroundTask"
-//            try? Context.saveToPersistentStore(context)
-//        })
-        
-        print(Request<User>.all.count)
-        print(Request<Shop>.all.count)
-        print(Request<Address>.all.count)
+        })
 
         return true
     }
