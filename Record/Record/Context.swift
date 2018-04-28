@@ -23,14 +23,14 @@ public class Context {
     public var root: NSManagedObjectContext
     public var saving: NSManagedObjectContext
     
-    @available(iOS 10.0, *)
-    internal var container: NSPersistentContainer? {
-        return Stack.main._container as? NSPersistentContainer
-    }
+//    @available(iOS 10.0, *)
+//    internal var container: NSPersistentContainer? {
+//        return Stack.main.persistentContainer
+//    }
     
    internal static var isPersistentContainerAvailable: Bool {
         var available = false
-        if #available(iOS 10.0, *), Context.main.container != nil {
+        if #available(iOS 10.0, *), Stack.main.persistentContainer != nil {
             available = true
         }
         return available
@@ -108,7 +108,7 @@ public extension Context {
     
     public static func newPrivateQueuContext() -> NSManagedObjectContext {
         var context: NSManagedObjectContext
-        if #available(iOS 10.0, *), let container = Context.main.container {
+        if #available(iOS 10.0, *), let container = Stack.main.persistentContainer {
             context = container.newBackgroundContext()
             print(context.parent as Any)
         } else {

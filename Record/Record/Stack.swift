@@ -38,7 +38,12 @@ public class Stack {
     }
     
     internal var _container: Any?
-
+    
+    @available(iOS 10.0, *)
+    public var persistentContainer: NSPersistentContainer? {
+        return _container as? NSPersistentContainer
+    }
+    
     @available(iOS 10.0, *)
     @discardableResult public static func setupUsingPersistentContainer(stack modelName: String) throws -> Stack {
         let container = NSPersistentContainer(name: modelName)
