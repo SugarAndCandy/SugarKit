@@ -3,6 +3,7 @@
     <entity name="Address" representedClassName="Address" syncable="YES">
         <attribute name="id" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="name2" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
         <relationship name="shop" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Shop" inverseName="address" inverseEntity="Shop" syncable="YES"/>
     </entity>
     <entity name="Shop" representedClassName="Shop" syncable="YES">
@@ -23,8 +24,8 @@
         </userInfo>
     </entity>
     <elements>
+        <element name="Address" positionX="457" positionY="-18" width="128" height="103"/>
         <element name="Shop" positionX="169" positionY="-18" width="128" height="103"/>
         <element name="User" positionX="-63" positionY="-3" width="128" height="88"/>
-        <element name="Address" positionX="457" positionY="-18" width="128" height="88"/>
     </elements>
 </model>

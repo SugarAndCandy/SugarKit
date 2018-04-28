@@ -21,23 +21,39 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         do {
-            try Stack.setup(stack: "RecordCase", autoMigration: true)
+            try Stack.setupUsingPersistentContainer(stack: "RecordCase")//.setup(stack: "RecordCase", autoMigration: true)
         } catch {
             print(error)
         }
 
-        let info = (1..<5000).map({
+        let userInfo = (1..<1000).map({
             return ["id" : $0, "name" : "user_name", "shops":
                 [["id" : $0, "name" : "shop_name", "address": ["id" : $0, "name" : "address_name"]]]]
         })
     
 
         
-        Saver<User>.saveEntities(onSerialQueue: info, deleteUnmatched: false, completionOnMainThread: { (users) in
+        Saver<User>.saveEntities(onSerialQueue: userInfo, deleteUnmatched: false, completionOnMainThread: { (users) in
             print(users)
             
         })
         
+        let shopInfo = (1000..<2000).map({
+            return ["id" : $0, "name" : "shop_name", "address": ["id" : $0, "name" : "address_name"]]
+        })
+        
+        Saver<Shop>.saveEntities(onSerialQueue: shopInfo, deleteUnmatched: false, completionOnMainThread: { (shops) in
+            print(shops)
+        })
+        
+        let addressInfo = (500..<1000).map({
+            return["id" : $0, "name" : "address_name"]
+            
+        })
+
+        Saver<Address>.saveEntities(onSerialQueue: addressInfo, deleteUnmatched: false, completionOnMainThread: { (address) in
+            print(address)
+        })
         print(Request<User>.all.count)
         print(Request<Shop>.all.count)
         print(Request<Address>.all.count)

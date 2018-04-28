@@ -11,7 +11,7 @@ import CoreData
 public class Stack {
     
     public static var main: Stack {
-        assert(initialized == nil, "Stack  is not setup. Run `Stack.setup(stack:autoMigration:)`")
+        assert(initialized != nil, "Stack  is not setup. Run `Stack.setup(stack:autoMigration:)`")
         return initialized!
     }
     
@@ -35,6 +35,28 @@ public class Stack {
     
     private static var sqlitePragmasOption: [AnyHashable: Any] {
         return [NSSQLitePragmasOption: ["journal_mode": "WAL"]]
+    }
+    
+    internal var _container: Any?
+
+    @available(iOS 10.0, *)
+    @discardableResult public static func setupUsingPersistentContainer(stack modelName: String) throws -> Stack {
+        let container = NSPersistentContainer(name: modelName)
+        var error: Error?
+        container.loadPersistentStores(completionHandler: { (storeDescription, containeRerror) in
+            error = containeRerror
+        })
+        if let error = error {
+            throw error
+        }
+        let context = setupContext(container: container)
+        let store = Store()
+        let coordinator = Coordinator()
+        let stack =  Stack(store: store, coordinator: coordinator, context: context)
+        Stack.initialized = stack
+        stack._container = container
+        return stack
+        
     }
     
     @discardableResult public static func setup(stack modelName: String, autoMigration: Bool = false) throws -> Stack {
@@ -82,6 +104,7 @@ public class Stack {
         let savingContext = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
         savingContext.performAndWait {
             savingContext.persistentStoreCoordinator = persistentStoreCoordinator
+            savingContext.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
         }
 
         let context = setupContext(root: mainContext, saving: savingContext)
@@ -92,7 +115,14 @@ public class Stack {
         return stack
     }
     
-    static func setupContext(root: NSManagedObjectContext, saving: NSManagedObjectContext) -> Context {
+    @available(iOS 10.0, *)
+    internal static func setupContext(container: NSPersistentContainer) -> Context {
+        let context = Context(container: container)
+        Context.initialized = context
+        return context
+    }
+    
+    internal static func setupContext(root: NSManagedObjectContext, saving: NSManagedObjectContext) -> Context {
         let context = Context(root: root, saving: saving)
         Context.initialized = context
         
