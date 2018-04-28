@@ -34,7 +34,7 @@ public struct AnyEntityDescription<T: NSManagedObject>: EntityDescriber {
 
 }
 
-public struct AttributeDescription<T: NSAttributeDescription> {
+public struct AnyAttributeDescription<T: NSAttributeDescription> {
     let attributeDescription: NSAttributeDescription
     init(_ attributeDescription: NSAttributeDescription) {
         self.attributeDescription = attributeDescription

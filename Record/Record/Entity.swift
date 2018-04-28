@@ -60,11 +60,11 @@ extension Entity {
     }
     
     public static func create(from object: [AnyHashable: Any], in context: NSManagedObjectContext) -> T? {
-        var managedObject: NSManagedObject?
+        var managedObject: T?
         context.performAndWait {
             if let primaryKeyAttribute = AnyEntityDescription<T>.primaryKey {//entityDescription(in: context)?.primaryKey {
             
-                if let primaryKey = object[AttributeDescription(primaryKeyAttribute).mappedKey] {//object[primaryKeyAttribute.mappedKey] {
+                if let primaryKey = object[AnyAttributeDescription(primaryKeyAttribute).mappedKey] {//object[primaryKeyAttribute.mappedKey] {
                     let predicate = NSPredicate(format: "%K == %@", argumentArray: [primaryKeyAttribute.name, primaryKey])
 //                    let filter = Filter<Self>(nsPredicate: predicate)
                     managedObject = Request<T>.first(with: predicate, in: context)//first(when: filter, in: context)
@@ -75,7 +75,7 @@ extension Entity {
             }
 //            managedObject?.importValues(from: object, in: context)
         }
-        return nil
+        return managedObject
 //        return managedObject as? Self
     }
 }
