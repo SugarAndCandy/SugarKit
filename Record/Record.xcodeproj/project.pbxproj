@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		8C3295BD2093562000616ED6 /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C3295BC2093562000616ED6 /* Log.swift */; };
 		8C3295BF209356C200616ED6 /* AnyEntityDescription.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C3295BE209356C100616ED6 /* AnyEntityDescription.swift */; };
 		8C373AB2208A0082002D47FB /* Record.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C373AA8208A0081002D47FB /* Record.framework */; };
 		8C373AB7208A0082002D47FB /* RecordTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C373AB6208A0082002D47FB /* RecordTests.swift */; };
@@ -19,6 +18,7 @@
 		8C373ACC208A049C002D47FB /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C373ACB208A049C002D47FB /* Coordinator.swift */; };
 		8C373AD0208A04DD002D47FB /* Log+Record.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C373ACF208A04DD002D47FB /* Log+Record.swift */; };
 		8C6FFB832094490A00713993 /* Importer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C6FFB822094490A00713993 /* Importer.swift */; };
+		8C8FEDDB20A1B91B0085603C /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C8FEDDA20A1B91B0085603C /* Log.swift */; };
 		8CA1D94A2094A126008A06A7 /* EntityDescription.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA1D9492094A126008A06A7 /* EntityDescription.swift */; };
 		8CA1D94C2094A167008A06A7 /* EntityDescriptionable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA1D94B2094A167008A06A7 /* EntityDescriptionable.swift */; };
 		8CA1D94E2094A19B008A06A7 /* Saver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA1D94D2094A19B008A06A7 /* Saver.swift */; };
@@ -43,7 +43,6 @@
 
 /* Begin PBXFileReference section */
 		8C3295B72093554300616ED6 /* Log.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Log.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		8C3295BC2093562000616ED6 /* Log.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Log.swift; path = ../../../Log/Log.swift; sourceTree = "<group>"; };
 		8C3295BE209356C100616ED6 /* AnyEntityDescription.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnyEntityDescription.swift; sourceTree = "<group>"; };
 		8C373AA8208A0081002D47FB /* Record.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Record.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8C373AAB208A0081002D47FB /* Record.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Record.h; sourceTree = "<group>"; };
@@ -58,6 +57,7 @@
 		8C373ACB208A049C002D47FB /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		8C373ACF208A04DD002D47FB /* Log+Record.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Log+Record.swift"; sourceTree = "<group>"; };
 		8C6FFB822094490A00713993 /* Importer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Importer.swift; sourceTree = "<group>"; };
+		8C8FEDDA20A1B91B0085603C /* Log.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Log.swift; path = ../../Log/Log.swift; sourceTree = "<group>"; };
 		8CA1D9492094A126008A06A7 /* EntityDescription.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntityDescription.swift; sourceTree = "<group>"; };
 		8CA1D94B2094A167008A06A7 /* EntityDescriptionable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntityDescriptionable.swift; sourceTree = "<group>"; };
 		8CA1D94D2094A19B008A06A7 /* Saver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Saver.swift; sourceTree = "<group>"; };
@@ -97,14 +97,6 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		8C3295BB209355F000616ED6 /* Support */ = {
-			isa = PBXGroup;
-			children = (
-				8C3295BC2093562000616ED6 /* Log.swift */,
-			);
-			path = Support;
-			sourceTree = "<group>";
-		};
 		8C373A9E208A0081002D47FB = {
 			isa = PBXGroup;
 			children = (
@@ -127,7 +119,7 @@
 		8C373AAA208A0081002D47FB /* Record */ = {
 			isa = PBXGroup;
 			children = (
-				8C3295BB209355F000616ED6 /* Support */,
+				8C8FEDDA20A1B91B0085603C /* Log.swift */,
 				8C373AAB208A0081002D47FB /* Record.h */,
 				943B755E208CD17D00F8F652 /* Entity.swift */,
 				8CA1D9492094A126008A06A7 /* EntityDescription.swift */,
@@ -273,7 +265,6 @@
 				943B7563208CD17D00F8F652 /* FetchRequest.swift in Sources */,
 				8C373AC7208A01BD002D47FB /* Store.swift in Sources */,
 				8CA1D94A2094A126008A06A7 /* EntityDescription.swift in Sources */,
-				8C3295BD2093562000616ED6 /* Log.swift in Sources */,
 				8CA1D9502094A207008A06A7 /* AnyPropertyDescription.swift in Sources */,
 				8C373AC9208A01E4002D47FB /* RecordError.swift in Sources */,
 				8C373ACC208A049C002D47FB /* Coordinator.swift in Sources */,
@@ -285,6 +276,7 @@
 				8C6FFB832094490A00713993 /* Importer.swift in Sources */,
 				8CA1D94C2094A167008A06A7 /* EntityDescriptionable.swift in Sources */,
 				8C373AC5208A0165002D47FB /* Context.swift in Sources */,
+				8C8FEDDB20A1B91B0085603C /* Log.swift in Sources */,
 				943B7562208CD17D00F8F652 /* Request.swift in Sources */,
 				943B755C208CD16100F8F652 /* EntityNaming.swift in Sources */,
 				943B755D208CD16100F8F652 /* AnyEntityNaming.swift in Sources */,
