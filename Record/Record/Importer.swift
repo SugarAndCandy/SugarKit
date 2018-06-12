@@ -15,13 +15,39 @@ public struct Importer<T> {
     }
 }
 
+fileprivate extension Request {
+    func entity(for entityName: String, with predicate: NSPredicate, in context: NSManagedObjectContext) -> NSManagedObject? {
+        var relatedObject: NSManagedObject?
+        let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: entityName)
+        fetchRequest.entity =  NSEntityDescription.entity(forEntityName: entityName, in: context)
+        fetchRequest.fetchLimit = 1
+        fetchRequest.predicate = predicate
+       
+        context.performAndWait {
+            do {
+                relatedObject = try context.fetch(fetchRequest).first
+            } catch {
+                relatedObject = nil
+            }
+        }
+        
+        if relatedObject == nil {
+            if let entityDescription = NSEntityDescription.entity(forEntityName: entityName, in: context) {
+                relatedObject = NSManagedObject(entity: entityDescription, insertInto: context)
+            }
+        }
+        
+        return relatedObject
+    }
+}
+
 public extension Importer where T: NSManagedObject {
     
     public func importValues(from rootObject: [AnyHashable: Any], in context: NSManagedObjectContext) {
         importAttributes(from: rootObject)
         importRelationship(from: rootObject) { (relationship, object) in
             if let destinationEntity = relationship.destinationEntity {
-                if let primaryKeyAttribute =  AnyEntityDescription(destinationEntity).primaryKey {
+                if let primaryKeyAttribute = AnyEntityDescription(destinationEntity).primaryKey {
                     if let primaryKey = object[AnyPropertyDescription(primaryKeyAttribute).mappedKey] {
                         print(destinationEntity.managedObjectClassName)
                         let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: destinationEntity.managedObjectClassName)
@@ -46,7 +72,7 @@ public extension Importer where T: NSManagedObject {
                         }
                     }
                 } else {
-                    if  let entityDescription =  NSEntityDescription.entity(forEntityName: destinationEntity.managedObjectClassName, in: context) {
+                    if  let entityDescription = NSEntityDescription.entity(forEntityName: destinationEntity.managedObjectClassName, in: context) {
                         let relatedObject: NSManagedObject? = NSManagedObject(entity: entityDescription, insertInto: context)
                         if let entity = relatedObject {
                             let new = Importer<NSManagedObject>(entity)
@@ -74,7 +100,7 @@ public extension Importer where T: NSManagedObject {
         }
     }
     
-    public func importRelationship(from object: [AnyHashable: Any], related: (NSRelationshipDescription, [AnyHashable: Any]) -> ()) {
+    internal func importRelationship(from object: [AnyHashable: Any], related: (NSRelationshipDescription, [AnyHashable: Any]) -> ()) {
         let relationships = entity.entity.relationshipsByName
         for relationship in relationships {
             let anyAttributeDescription = AnyPropertyDescription(relationship.value)
@@ -93,7 +119,7 @@ public extension Importer where T: NSManagedObject {
         }
     }
     
-    public func importAttributes(from object: [AnyHashable: Any]) {
+    internal func importAttributes(from object: [AnyHashable: Any]) {
         let attributes = entity.entity.attributesByName
         for attribute in attributes {
             let anyAttributeDescription = AnyPropertyDescription(attribute.value)

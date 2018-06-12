@@ -55,7 +55,7 @@ extension Entity {
             if managedObject == nil {
                 if let entity = create(in: context) {
                     managedObject = entity
-                    Importer<NSManagedObject>(entity).importValues(from: object, in: context)
+                    Importer<T>(entity).importValues(from: object, in: context)
                 }
             }
         }

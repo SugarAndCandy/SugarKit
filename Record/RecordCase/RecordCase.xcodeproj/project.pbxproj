@@ -14,12 +14,12 @@
 		8C1D6842209444780001C3AE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8C1D6841209444780001C3AE /* Assets.xcassets */; };
 		8C1D6845209444780001C3AE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8C1D6843209444780001C3AE /* LaunchScreen.storyboard */; };
 		8C6FFB7C209444F400713993 /* Record.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C6FFB7B209444F400713993 /* Record.framework */; };
-		8CA1D9412094729C008A06A7 /* User+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA1D93B2094729B008A06A7 /* User+CoreDataClass.swift */; };
-		8CA1D9422094729C008A06A7 /* Address+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA1D93C2094729C008A06A7 /* Address+CoreDataClass.swift */; };
-		8CA1D9432094729C008A06A7 /* Shop+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA1D93D2094729C008A06A7 /* Shop+CoreDataClass.swift */; };
-		8CA1D9442094729C008A06A7 /* Address+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA1D93E2094729C008A06A7 /* Address+CoreDataProperties.swift */; };
-		8CA1D9452094729C008A06A7 /* Shop+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA1D93F2094729C008A06A7 /* Shop+CoreDataProperties.swift */; };
-		8CA1D9462094729C008A06A7 /* User+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA1D9402094729C008A06A7 /* User+CoreDataProperties.swift */; };
+		943256D42099B1980064037E /* Shop+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 943256CE2099B1980064037E /* Shop+CoreDataClass.swift */; };
+		943256D52099B1980064037E /* User+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 943256CF2099B1980064037E /* User+CoreDataClass.swift */; };
+		943256D62099B1980064037E /* Address+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 943256D02099B1980064037E /* Address+CoreDataClass.swift */; };
+		943256D72099B1980064037E /* Address+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 943256D12099B1980064037E /* Address+CoreDataProperties.swift */; };
+		943256D82099B1980064037E /* User+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 943256D22099B1980064037E /* User+CoreDataProperties.swift */; };
+		943256D92099B1980064037E /* Shop+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 943256D32099B1980064037E /* Shop+CoreDataProperties.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -33,12 +33,12 @@
 		8C1D6846209444780001C3AE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8C6FFB7B209444F400713993 /* Record.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Record.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8CA1D93920946F78008A06A7 /* SuperPuperDuperData.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = SuperPuperDuperData.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		8CA1D93B2094729B008A06A7 /* User+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "User+CoreDataClass.swift"; path = "/Users/kolesnik/SugarKit/Record/RecordCase/RecordCase/User+CoreDataClass.swift"; sourceTree = "<absolute>"; };
-		8CA1D93C2094729C008A06A7 /* Address+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Address+CoreDataClass.swift"; path = "/Users/kolesnik/SugarKit/Record/RecordCase/RecordCase/Address+CoreDataClass.swift"; sourceTree = "<absolute>"; };
-		8CA1D93D2094729C008A06A7 /* Shop+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Shop+CoreDataClass.swift"; path = "/Users/kolesnik/SugarKit/Record/RecordCase/RecordCase/Shop+CoreDataClass.swift"; sourceTree = "<absolute>"; };
-		8CA1D93E2094729C008A06A7 /* Address+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Address+CoreDataProperties.swift"; path = "/Users/kolesnik/SugarKit/Record/RecordCase/RecordCase/Address+CoreDataProperties.swift"; sourceTree = "<absolute>"; };
-		8CA1D93F2094729C008A06A7 /* Shop+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Shop+CoreDataProperties.swift"; path = "/Users/kolesnik/SugarKit/Record/RecordCase/RecordCase/Shop+CoreDataProperties.swift"; sourceTree = "<absolute>"; };
-		8CA1D9402094729C008A06A7 /* User+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "User+CoreDataProperties.swift"; path = "/Users/kolesnik/SugarKit/Record/RecordCase/RecordCase/User+CoreDataProperties.swift"; sourceTree = "<absolute>"; };
+		943256CE2099B1980064037E /* Shop+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Shop+CoreDataClass.swift"; sourceTree = "<group>"; };
+		943256CF2099B1980064037E /* User+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "User+CoreDataClass.swift"; sourceTree = "<group>"; };
+		943256D02099B1980064037E /* Address+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Address+CoreDataClass.swift"; sourceTree = "<group>"; };
+		943256D12099B1980064037E /* Address+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Address+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		943256D22099B1980064037E /* User+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "User+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		943256D32099B1980064037E /* Shop+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Shop+CoreDataProperties.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -73,12 +73,12 @@
 		8C1D6836209444770001C3AE /* RecordCase */ = {
 			isa = PBXGroup;
 			children = (
-				8CA1D93C2094729C008A06A7 /* Address+CoreDataClass.swift */,
-				8CA1D93E2094729C008A06A7 /* Address+CoreDataProperties.swift */,
-				8CA1D93D2094729C008A06A7 /* Shop+CoreDataClass.swift */,
-				8CA1D93F2094729C008A06A7 /* Shop+CoreDataProperties.swift */,
-				8CA1D93B2094729B008A06A7 /* User+CoreDataClass.swift */,
-				8CA1D9402094729C008A06A7 /* User+CoreDataProperties.swift */,
+				943256D02099B1980064037E /* Address+CoreDataClass.swift */,
+				943256D12099B1980064037E /* Address+CoreDataProperties.swift */,
+				943256CE2099B1980064037E /* Shop+CoreDataClass.swift */,
+				943256D32099B1980064037E /* Shop+CoreDataProperties.swift */,
+				943256CF2099B1980064037E /* User+CoreDataClass.swift */,
+				943256D22099B1980064037E /* User+CoreDataProperties.swift */,
 				8C1D6837209444770001C3AE /* AppDelegate.swift */,
 				8C1D6839209444770001C3AE /* ViewController.swift */,
 				8C1D683B209444770001C3AE /* Main.storyboard */,
@@ -171,14 +171,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				8C1D683A209444770001C3AE /* ViewController.swift in Sources */,
-				8CA1D9432094729C008A06A7 /* Shop+CoreDataClass.swift in Sources */,
+				943256D42099B1980064037E /* Shop+CoreDataClass.swift in Sources */,
+				943256D82099B1980064037E /* User+CoreDataProperties.swift in Sources */,
 				8C1D6838209444770001C3AE /* AppDelegate.swift in Sources */,
-				8CA1D9442094729C008A06A7 /* Address+CoreDataProperties.swift in Sources */,
-				8CA1D9422094729C008A06A7 /* Address+CoreDataClass.swift in Sources */,
-				8CA1D9452094729C008A06A7 /* Shop+CoreDataProperties.swift in Sources */,
-				8CA1D9412094729C008A06A7 /* User+CoreDataClass.swift in Sources */,
+				943256D72099B1980064037E /* Address+CoreDataProperties.swift in Sources */,
 				8C1D6840209444770001C3AE /* RecordCase.xcdatamodeld in Sources */,
-				8CA1D9462094729C008A06A7 /* User+CoreDataProperties.swift in Sources */,
+				943256D62099B1980064037E /* Address+CoreDataClass.swift in Sources */,
+				943256D92099B1980064037E /* Shop+CoreDataProperties.swift in Sources */,
+				943256D52099B1980064037E /* User+CoreDataClass.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

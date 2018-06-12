@@ -8,11 +8,12 @@
 
 import CoreData
 
-public class Request<Entity: NSManagedObject> {
+public class Request<Entity> {
     
 }
 
-extension Request {
+
+extension Request where Entity: NSManagedObject {
 
     public static var first: Entity? {
         return first()
@@ -23,7 +24,7 @@ extension Request {
         return executeFetchRequest(request, in: context).first
     }
 }
-extension Request {
+extension Request where Entity: NSManagedObject {
     public static var all: [Entity] {
         return all()
     }
@@ -36,7 +37,7 @@ extension Request {
 }
 
 
-extension Request {
+extension Request where Entity: NSManagedObject {
     public static func executeFetchRequest(_ request: NSFetchRequest<Entity>, in context: NSManagedObjectContext) -> [Entity] {
         var returnedEntities: [Entity]?
         context.performAndWait {

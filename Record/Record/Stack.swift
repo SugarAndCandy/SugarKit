@@ -64,7 +64,7 @@ public class Stack {
         
     }
     
-    @discardableResult public static func setup(stack modelName: String, autoMigration: Bool = false) throws -> Stack {
+    @discardableResult public static func setup(stack modelName: String, autoMigration: Bool = true) throws -> Stack {
         
         guard let urlForModel = Bundle.main.url(forResource: modelName, withExtension: "momd") else {
             throw RecordError(file: #file, function: #function, message: "Not found url to model '\(modelName)' in main bundle")
