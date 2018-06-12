@@ -18,6 +18,7 @@
 		8C373ACC208A049C002D47FB /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C373ACB208A049C002D47FB /* Coordinator.swift */; };
 		8C373AD0208A04DD002D47FB /* Log+Record.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C373ACF208A04DD002D47FB /* Log+Record.swift */; };
 		8C6FFB832094490A00713993 /* Importer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C6FFB822094490A00713993 /* Importer.swift */; };
+		8C8FEDDB20A1B91B0085603C /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C8FEDDA20A1B91B0085603C /* Log.swift */; };
 		8CA1D94A2094A126008A06A7 /* EntityDescription.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA1D9492094A126008A06A7 /* EntityDescription.swift */; };
 		8CA1D94C2094A167008A06A7 /* EntityDescriptionable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA1D94B2094A167008A06A7 /* EntityDescriptionable.swift */; };
 		8CA1D94E2094A19B008A06A7 /* Saver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA1D94D2094A19B008A06A7 /* Saver.swift */; };
@@ -57,6 +58,7 @@
 		8C373ACB208A049C002D47FB /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		8C373ACF208A04DD002D47FB /* Log+Record.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Log+Record.swift"; sourceTree = "<group>"; };
 		8C6FFB822094490A00713993 /* Importer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Importer.swift; sourceTree = "<group>"; };
+		8C8FEDDA20A1B91B0085603C /* Log.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Log.swift; path = ../../Log/Log.swift; sourceTree = "<group>"; };
 		8CA1D9492094A126008A06A7 /* EntityDescription.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntityDescription.swift; sourceTree = "<group>"; };
 		8CA1D94B2094A167008A06A7 /* EntityDescriptionable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntityDescriptionable.swift; sourceTree = "<group>"; };
 		8CA1D94D2094A19B008A06A7 /* Saver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Saver.swift; sourceTree = "<group>"; };
