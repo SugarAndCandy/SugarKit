@@ -9,7 +9,7 @@
 import Foundation
 
 public struct Event: RawRepresentable, Equatable, Hashable {
-    public struct Name: RawRepresentable, Equatable, Hashable {
+    public struct Key: RawRepresentable, Equatable, Hashable {
         public typealias RawValue = String
         public var rawValue: Event.RawValue
         public var hashValue: Int {
