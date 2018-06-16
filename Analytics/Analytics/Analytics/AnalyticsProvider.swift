@@ -11,13 +11,15 @@ import Foundation
 public struct AnalyticsProvider<Report, Analytics> where Report: Reportable, Analytics: AnalyticsProtocol {
 
     public init() { }
-    
+
+    @discardableResult
     public func log(_ report: Report, force execute: Bool = true) -> AnalyticsEndpointProtocol  {
         let analytics = Analytics.report(report.event, parameters: report.parametres)
         if execute { analytics.execute() }
         return analytics
     }
     
+    @discardableResult
     public func report(after traking: @escaping (TimeInterval) -> Report) -> TrackingAnalytics {
         let tracking = TrackingAnalytics(onFinishTraking: { (time) in
             let report = traking(time)
