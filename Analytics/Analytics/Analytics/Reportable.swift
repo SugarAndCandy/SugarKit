@@ -10,5 +10,5 @@ import Foundation
 
 public protocol Reportable {
     var event: Event { get }
-    var parametres: [Event.Name: Any]? { get }
+    var parametres: [Event.Key: Any]? { get }
 }

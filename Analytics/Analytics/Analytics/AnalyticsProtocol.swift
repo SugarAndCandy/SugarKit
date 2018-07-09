@@ -9,7 +9,7 @@
 import Foundation
 
 public protocol AnalyticsProtocol: class {
-    static func report(_ event: Event, parameters: [Event.Name: Any]?) -> AnalyticsEndpointProtocol
+    static func report(_ event: Event, parameters: [Event.Key: Any]?) -> AnalyticsEndpointProtocol
 }
 
 public typealias OnFinishTraking = (TimeInterval) -> Void
