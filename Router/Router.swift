@@ -38,14 +38,6 @@ public extension TransitionView where Self: UIViewController {
 public protocol FactoryProtocol {
     associatedtype TransitionHandler: TransitionView
     func instantiateModuleTransitionHandler() -> TransitionHandler
-    static func instantiateModuleTransitionHandler() -> TransitionHandler
-    
-}
-
-public extension FactoryProtocol {
-    func instantiateModuleTransitionHandler() -> TransitionHandler {
-        return type(of: self).instantiateModuleTransitionHandler()
-    }
 }
 
 public enum TransitionError: Error {
