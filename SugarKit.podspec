@@ -4,7 +4,7 @@ Pod::Spec.new do |s|
 
 
   s.name         = "SugarKit"
-  s.version      = "0.0.5"
+  s.version      = "0.0.6"
   s.summary  = 'Framework which hepls You develop your app faster'
 
 
