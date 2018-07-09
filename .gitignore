@@ -8,6 +8,5 @@ Pods/*
 build/*
 */build/*
 *.generated.swift
-*.xcworkspace
 *Podfile.lock
 

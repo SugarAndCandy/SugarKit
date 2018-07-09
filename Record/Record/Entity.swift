@@ -6,30 +6,19 @@
 //  Copyright © 2018 Maksim Kolesnik. All rights reserved.
 //
 
-import Foundation
 import CoreData
 
 
-public protocol EntityDescriptionsCreatable: class {
-    static func entityDescription(in context: NSManagedObjectContext) -> NSEntityDescription?
-}
-
-public class EntityDescription<Entity: NSManagedObject>: EntityDescriptionsCreatable {
-    
-    public static func entityDescription(in context: NSManagedObjectContext) -> NSEntityDescription? {
-        let forEntityName = AnyEntityNaming.init(objectType: Entity.self).entityName
-        let entityDescription = NSEntityDescription.entity(forEntityName: forEntityName, in: context)
-        return entityDescription
-    }
-
-}
-
 public struct Entity<T: NSManagedObject> {
     public let entity: T
-    public init(entity: T) {
+    public init(_ entity: T) {
         self.entity = entity
     }
     
+}
+
+extension Entity {
+
     public func `in`(_ context: NSManagedObjectContext = Context.main.root) -> T? {
         if entity.objectID.isTemporaryID {
             do { try entity.managedObjectContext?.obtainPermanentIDs(for: [entity]) }
@@ -44,9 +33,55 @@ public struct Entity<T: NSManagedObject> {
             return nil
         }
     }
+}
+
+
+extension Entity {
     
     public static func create(in context: NSManagedObjectContext = Context.main.saving) -> T? {
         guard let entityDescription = EntityDescription<T>.entityDescription(in: context) else { return nil }
         return NSManagedObject(entity: entityDescription, insertInto: context) as? T
     }
+    
+    public static func create(from object: [AnyHashable: Any], in context: NSManagedObjectContext = Context.main.saving) -> T? {
+        var managedObject: T?
+        context.performAndWait {
+            if let primaryKeyAttribute = EntityDescription<T>.primaryKey {
+                if let primaryKey = object[AnyPropertyDescription(primaryKeyAttribute).mappedKey] {
+                    let predicate = NSPredicate(format: "%K == %@", argumentArray: [primaryKeyAttribute.name, primaryKey])
+                    managedObject = Request<T>.first(with: predicate, in: context)
+                }
+            }
+            if managedObject == nil {
+                if let entity = create(in: context) {
+                    managedObject = entity
+                    Importer<T>(entity).importValues(from: object, in: context)
+                }
+            }
+        }
+        return managedObject
+    }
+}
+
+extension Entity {
+    
+    public func delete(in context: NSManagedObjectContext = Context.main.root) throws {
+        do {
+            let existingObject = try context.existingObject(with: entity.objectID)
+            context.delete(existingObject)
+        } catch {
+            throw error
+        }
+    }
+
+    public static func delete(with predicate: NSPredicate? = nil, from context: NSManagedObjectContext = Context.main.root) {
+        let request = FetchRequest<T>(in: context, filtered: predicate).nsFetchRequest
+        request.returnsObjectsAsFaults = true
+        request.includesPropertyValues = false
+        let objectsToDelete = Request<T>.executeFetchRequest(request, in: context)
+        for object in objectsToDelete {
+            context.delete(object)
+        }
+    }
+
 }

@@ -6,13 +6,14 @@
 //  Copyright © 2018 Sugar and Candy. All rights reserved.
 //
 
-import Foundation
 import CoreData
 
 
 public typealias SaveCompletionHandler = (Bool, Error?) -> ()
 
 public class Context {
+    
+    internal static var initialized: Context?
     
     public static var main: Context {
         assert(initialized != nil, "Context is not setup")
@@ -22,9 +23,25 @@ public class Context {
     public var root: NSManagedObjectContext
     public var saving: NSManagedObjectContext
     
+    internal static var isPersistentContainerAvailable: Bool {
+        var available = false
+        if #available(iOS 10.0, *), Stack.main.persistentContainer != nil {
+            available = true
+        }
+        return available
+    }
+    
+    @available(iOS 10.0, *)
+    public convenience init(container: NSPersistentContainer) {
+        self.init(root: container.viewContext, saving: container.newBackgroundContext())
+    }
+    
     public init(root: NSManagedObjectContext, saving: NSManagedObjectContext) {
         self.root = root
         self.saving = saving
+        self.saving.performAndWait { [weak self] in
+            self?.saving.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
+        }
     }
     
     deinit {
@@ -33,8 +50,7 @@ public class Context {
 }
 extension Context {
     public static func save(with block: @escaping (NSManagedObjectContext) -> Void) throws {
-        let savingContext = Context.main.saving
-        let local = context(with: savingContext)
+        let local = Context.privateQueuContext
         var returnedError: Error?
         local.performAndWait {
             block(local)
@@ -42,37 +58,76 @@ extension Context {
             catch { returnedError = error }
         }
         if let error = returnedError { throw error }
-
+        
     }
     
-    public static func save(changes: @escaping (NSManagedObjectContext) -> Void, completion: SaveCompletionHandler?) {
-    let savingContext = Context.main.saving
-    let local = context(with: savingContext)
+    public static func save(with block: @escaping (NSManagedObjectContext) -> Void, completion: SaveCompletionHandler?) {
+        let savingContext = Context.main.saving
+        let local = context(with: savingContext)
         local.perform {
-            changes(local)
+            block(local)
             saveToPersistentStore(local, completion: completion)
+        }
+    }
+}
+
+extension Context {
+    public static func save(in queue: DispatchQueue,
+                            savingBlock block: @escaping (_ localContext: NSManagedObjectContext) -> Void,
+                            completionOnMainThread completion: @escaping () -> Void)  {
+        queue.async {
+            do {
+                try Context.save(with: { (localContext) in
+                    block(localContext)
+                })
+            } catch  {
+                print(error)
+            }
+            DispatchQueue.main.async {
+                completion()
+            }
         }
     }
     
 }
-extension Context {
 
+public extension Context {
+    static var privateQueuContext: NSManagedObjectContext {
+        return context(with: Context.main.saving)
+    }
+    
+}
+
+public extension Context {
+    
     public static func newPrivateQueuContext() -> NSManagedObjectContext {
-        let context = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
+        var context: NSManagedObjectContext
+        if #available(iOS 10.0, *), let container = Stack.main.persistentContainer {
+            context = container.newBackgroundContext()
+            print(context.parent as Any)
+        } else {
+            context = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
+        }
         Log.log("Created new private queue context: \(context)", prefix: .record, type: .success)
         return context
     }
     
     public static func context(with parent: NSManagedObjectContext) -> NSManagedObjectContext {
         let context = newPrivateQueuContext()
+        if !isPersistentContainerAvailable {
             context.parent = parent
-        obtainPermanentIDsBeforeSaving(context)
+            obtainPermanentIDsBeforeSaving(context)
+        }
         return context
     }
     
     private static func obtainPermanentIDsBeforeSaving(_ context: NSManagedObjectContext) {
         NotificationCenter.default.addObserver(Context.main, selector: #selector(contextWillSave(_:)), name: Notification.Name.NSManagedObjectContextWillSave, object: context)
     }
+    
+}
+
+internal extension Context {
     
     @objc func contextWillSave(_ motification: Notification) {
         guard let context = motification.object as? NSManagedObjectContext else { return }
@@ -83,7 +138,6 @@ extension Context {
         }
     }
     
-    internal static var initialized: Context?
 }
 
 extension Context {
@@ -95,9 +149,9 @@ extension Context {
             self.rawValue = rawValue
         }
         
-        static let onlySelf = SavingOptions(rawValue: 1 << 1)
-        static let withParent = SavingOptions(rawValue: 1 << 2)
-        static let synchronously = SavingOptions(rawValue: 1 << 3)
+        public static let onlySelf = SavingOptions(rawValue: 1 << 1)
+        public static let withParent = SavingOptions(rawValue: 1 << 2)
+        public static let synchronously = SavingOptions(rawValue: 1 << 3)
     }
 }
 
@@ -119,12 +173,12 @@ extension Context {
         save(with: context, options: [.withParent, .synchronously], completion: { (success, error) in
             if let error = error { returnedError = error }
         })
-      if let returnedError = returnedError { throw returnedError }
+        if let returnedError = returnedError { throw returnedError }
     }
     
     public static func saveToPersistentStore(_ context: NSManagedObjectContext, completion: SaveCompletionHandler?) {
         save(with: context, options: .withParent, completion: completion)
-
+        
     }
 }
 
