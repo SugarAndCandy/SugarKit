@@ -44,7 +44,7 @@ public enum TransitionError: Error {
     case castError
 }
 
-public struct Transition<T: TransitionView> {
+public struct Transition<T: UIViewController> {
     public weak var source: T?
     public init(source aSource: T) {
         source = aSource
@@ -54,7 +54,7 @@ public struct Transition<T: TransitionView> {
             let destanation = factory.instantiateModuleTransitionHandler()
             let presenter = destanation.presenter
             let module = Moduling(presenter)
-            guard let vc1 = source?.asViewController else { throw TransitionError.castError }
+            guard let vc1 = source else { throw TransitionError.castError }
             guard let vc2 = destanation.asViewController else { throw TransitionError.castError }
             transitionBlock(vc1, vc2)
             return module
