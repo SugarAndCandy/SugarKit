@@ -6,38 +6,38 @@
 //  Copyright © 2018 Sugar and Candy. All rights reserved.
 //
 
+import UIKit
+
 import Foundation
 
 import UIKit
-public typealias ModuleTransitionBlock = (_ sourceModuleTransitionHandler: UIViewController, _ destinationModuleTransitionHandler: UIViewController) -> Void
 
-public struct Moduling<Base> {
+public typealias ModuleTransitionBlock = (UIViewController, UIViewController) -> Void
+
+public struct ModulePromise<Base> {
     public let base: Base
     public init(_ base: Base) {
         self.base = base
     }
-    public func perform(moduleInput: (_ presenter: Base) -> Void) {
+    public func perform(moduleInput: (Base) -> Void) {
         moduleInput(self.base)
     }
 }
 
-public protocol TransitionView: class {
-    associatedtype Presenter
-    var presenter: Presenter { get set }
-    var asViewController: UIViewController? { get }
+public protocol Presenter: AnyObject {
+    associatedtype ViewType
+    var view: ViewType? { get }
+    func configure()
 }
 
-public extension TransitionView {
-    var asViewController: UIViewController? { return nil }
+public protocol TransitionView: AnyObject {
+    associatedtype PresenterType: Presenter
+    var presenter: PresenterType { get set }
 }
 
-public extension TransitionView where Self: UIViewController {
-    var asViewController: UIViewController? { return self  }
-}
-
-public protocol FactoryProtocol {
-    associatedtype TransitionHandler: TransitionView
-    func instantiateModuleTransitionHandler() -> TransitionHandler
+public protocol TransitionFactory {
+    associatedtype ViewType: TransitionView
+    func instantiateModuleTransitionHandler() -> ViewType
 }
 
 public enum TransitionError: Error {
@@ -45,17 +45,21 @@ public enum TransitionError: Error {
 }
 
 public struct Transition<T: UIViewController> {
-    public weak var source: T?
-    public init(source aSource: T) {
-        source = aSource
+    public private(set) weak var source: T?
+    public init(source: T) {
+        self.source = source
     }
-    @discardableResult public func openModule<Factory, Presenter>(using factory: Factory, with transitionBlock: ModuleTransitionBlock) throws -> Moduling<Presenter>
-        where Factory: FactoryProtocol, Presenter == Factory.TransitionHandler.Presenter {
+    
+    @discardableResult
+    public func openModule<Factory, Presenter>(using factory: Factory, with transitionBlock: ModuleTransitionBlock) throws -> ModulePromise<Presenter>
+        where Factory: TransitionFactory,
+        Presenter == Factory.ViewType.PresenterType {
             let destanation = factory.instantiateModuleTransitionHandler()
             let presenter = destanation.presenter
-            let module = Moduling(presenter)
+            presenter.configure()
+            let module = ModulePromise(presenter)
             guard let vc1 = source else { throw TransitionError.castError }
-            guard let vc2 = destanation.asViewController else { throw TransitionError.castError }
+            guard let vc2 = destanation as? UIViewController else { throw TransitionError.castError }
             transitionBlock(vc1, vc2)
             return module
     }

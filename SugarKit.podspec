@@ -26,7 +26,7 @@ Pod::Spec.new do |s|
   
   s.source_files = 'SugarKit/**/*.swift'
 
-  s.swift_version = '4'
+  s.swift_version = '5'
 
   s.subspec 'Router' do |ss|
     ss.source_files = 'Router/**/*.swift'
